@@ -3,6 +3,7 @@ package com.example.pokedex
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -23,13 +24,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textSpecies: TextView
     private lateinit var textId : TextView
     private lateinit var buttonNext: Button
+    private lateinit var editTextNumber: EditText
+    private lateinit var buttonSearchID: Button
 
     var species = ""
-    var id = ""
+    var id = "25"
     var pokemonImageURL = ""
 
-//    val imageView = findViewById<ImageView>(R.id.imageView)
-//    val button = findViewById<Button>(R.id.buttonNext)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -44,18 +45,27 @@ class MainActivity : AppCompatActivity() {
         textId = binding.textId
         imagePokemon = binding.imagePokemon
         buttonNext = binding.buttonNext
-        getPokemon(25)
+        editTextNumber = binding.editTextNumber
+        buttonSearchID = binding.buttonSearchID
+        getPokemon(id)
         setButtonNextClickListener()
+        setButtonSearchIDClickListener()
     }
 
     private fun setButtonNextClickListener() {
         buttonNext.setOnClickListener {
-            val randId = Random.nextInt(1025)
-            getPokemon(randId)
+            id = Random.nextInt(1025).toString()
+            getPokemon(id)
+        }
+    }
+    private fun setButtonSearchIDClickListener() {
+        buttonSearchID.setOnClickListener {
+            id = editTextNumber.text.toString()
+            getPokemon(id)
         }
     }
 
-    private fun getPokemon(pokemonId: Int) {
+    private fun getPokemon(pokemonId: String) {
         val client = AsyncHttpClient()
         client["https://pokeapi.co/api/v2/pokemon/$pokemonId", object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
@@ -63,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 species = json.jsonObject.getString("name")
                 textSpecies.text = species.capitalize(Locale.ROOT)
 
-                id = json.jsonObject.getInt("id").toString()
+                id = json.jsonObject.getString("id")
                 textId.text = id
 
                 pokemonImageURL = json.jsonObject.getJSONObject("sprites").getString("front_default")

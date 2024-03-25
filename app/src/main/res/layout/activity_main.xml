@@ -50,4 +50,25 @@
         app:layout_constraintLeft_toLeftOf="@+id/textId"
         app:layout_constraintTop_toBottomOf="@+id/textId" />
 
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="147dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="number"
+        android:layout_marginTop="100dp"
+        app:layout_constraintRight_toRightOf="@+id/buttonNext"
+        app:layout_constraintLeft_toLeftOf="@+id/buttonNext"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNext" />
+
+    <Button
+        android:id="@+id/buttonSearchID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search by ID"
+        android:layout_marginTop="12dp"
+        app:layout_constraintRight_toRightOf="@+id/editTextNumber"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
