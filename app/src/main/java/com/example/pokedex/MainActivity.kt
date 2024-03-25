@@ -15,6 +15,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.example.pokedex.databinding.ActivityMainBinding
 import okhttp3.Headers
 import java.util.Locale
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -42,12 +43,21 @@ class MainActivity : AppCompatActivity() {
         textSpecies = binding.textSpecies
         textId = binding.textId
         imagePokemon = binding.imagePokemon
-        getPokemon("pikachu")
+        buttonNext = binding.buttonNext
+        getPokemon(25)
+        setButtonNextClickListener()
     }
 
-    private fun getPokemon(s: String) {
+    private fun setButtonNextClickListener() {
+        buttonNext.setOnClickListener {
+            val randId = Random.nextInt(1025)
+            getPokemon(randId)
+        }
+    }
+
+    private fun getPokemon(pokemonId: Int) {
         val client = AsyncHttpClient()
-        client["https://pokeapi.co/api/v2/pokemon/$s", object : JsonHttpResponseHandler() {
+        client["https://pokeapi.co/api/v2/pokemon/$pokemonId", object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.d("Pokemon", "response successful$json")
                 species = json.jsonObject.getString("name")
