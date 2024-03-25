@@ -70,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         client["https://pokeapi.co/api/v2/pokemon/$pokemonId", object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.d("Pokemon", "response successful$json")
-                species = json.jsonObject.getString("name")
+                val words = json.jsonObject.getString("name").split("-")
+                species = words.map { it.capitalize() }.joinToString(" ").toString()
                 textSpecies.text = species.capitalize(Locale.ROOT)
 
                 id = json.jsonObject.getString("id")
