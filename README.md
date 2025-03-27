@@ -40,7 +40,7 @@ My chosen API for this project is **Pokémon API**.
 
 Here's a video / GIF that demos all of the app's implemented features:
 
-<img src='https://i.imgur.com/6y1fylS.gif' title='Video Demo' width='' alt='Video Demo' />
+<img src='https://github.com/vchu22/codepath-and101-project5/blob/main/Pokedex.gif' title='Video Demo' width='' alt='Video Demo' />
 
 GIF created with **Peek**
 
